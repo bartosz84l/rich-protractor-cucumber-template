@@ -8,8 +8,6 @@ export const config: Config = {
 
     SELENIUM_PROMISE_MANAGER: false,
 
-    resultJsonOutputFile: 'reports/json/result.json',
-
     capabilities: {
         shardTestFiles: false,
         maxInstances: 1,
