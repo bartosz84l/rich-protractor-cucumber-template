@@ -1,0 +1,57 @@
+{
+  "name": "automation-template",
+  "version": "4.0.0",
+  "license": "MIT",
+  "description": "To demostrate cucumber tests for wildmoka app",
+  "homepage": "https://github.com/jacekokrojek/rich-protractor-cucumber-template",
+  "keywords": [
+    "protractor",
+    "cucumber",
+    "typescript",
+    "angular",
+    "angularjs",
+    "testing",
+    "behaviour driven development",
+    "bdd",
+    "selenium",
+    "webdriverJS",
+    "gherkin",
+    "automation testing"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "node -r ts-node/register ./node_modules/protractor/bin/protractor config/config.ts",
+    "headless": "node -r ts-node/register ./node_modules/protractor/bin/protractor config/config.headless.ts",
+    "scenario": "node -r ts-node/register ./node_modules/protractor/bin/protractor config/config.ts --cucumberOpts.tags=\"@scenario\"",
+    "webdriver-update": "webdriver-manager update",
+    "webdriver-start": "webdriver-manager start",
+    "debug": "node -r ts-node/register --inspect-brk ./node_modules/protractor/bin/protractor config/config.ts",
+    "debug-scenario": "node -r ts-node/register --inspect-brk ./node_modules/protractor/bin/protractor config/config.ts --cucumberOpts.tags=\"@scenario\""
+  },
+  "author": "Kamila Menes-Szuster <kamila.menes@testarmy.com>",
+  "devDependencies": {
+    "@types/cucumber": "^4.0.4",
+    "@types/node": "^10.7.1",
+    "@types/selenium-webdriver": "^3.0.10",
+    "all-contributors-cli": "^5.4.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "cucumber": "^5.0.3",
+    "cucumber-html-reporter": "^4.0.3",
+    "mkdirp": "^0.5.1",
+    "protractor": "^5.4.0",
+    "protractor-cucumber-framework": "^6.1.1",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.1"
+  },
+  "repository": "https://bitbucket.org/jacekokrojek-testarmy/wildmoka.git",
+  "dependencies": {
+    "btoa": "^1.2.1",
+    "cucumber-junit": "latest",
+    "cucumber-pretty": "^1.5.0",
+    "googleapis": "^27.0.0",
+    "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.0",
+    "simplecrawler": "^1.1.6"
+  }
+}

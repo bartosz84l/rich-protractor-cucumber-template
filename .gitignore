@@ -1,0 +1,12 @@
+node_modules/
+reports/
+.vscode
+.DS_Store
+npm-debug.log
+/data/downloads/*.jpg
+*.sh
+.tmp
+.vscode/
+.cache/
+.npm/
+.local/

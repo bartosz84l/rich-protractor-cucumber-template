@@ -1,0 +1,64 @@
+import { browser, Config } from "protractor";
+import { generateXmlReport } from "../support/reporter-xml"
+
+export const config: Config = {
+
+    seleniumAddress: "http://127.0.0.1:4444/wd/hub",
+    directConnect: true,
+
+    SELENIUM_PROMISE_MANAGER: false,
+
+    resultJsonOutputFile: 'reports/json/result.json',
+
+    capabilities: {
+        shardTestFiles: false,
+        maxInstances: 1,
+        browserName: "chrome",
+        restartBrowserBetweenTests: false,
+        chromeOptions: {
+            args: ['--no-sandbox', '--test-type=browser'],
+            prefs: {
+                'plugins.always_open_pdf_externally': true,
+                'download': {
+                    'directory_upgrade': true,
+                    'prompt_for_download': false,
+                    'default_directory': process.cwd() + "/data/downloads"
+                },
+                'profile.managed_default_content_settings.notifications': 1
+            },
+        },
+    },
+
+    framework: "custom",
+    frameworkPath: require.resolve("protractor-cucumber-framework"),
+
+    specs: [
+        "../features/*.feature",
+    ],
+
+    onPrepare: () => {
+        browser.ignoreSynchronization = true;
+        browser.manage().window().maximize();
+        browser.manage().timeouts().implicitlyWait(30000);
+    },
+
+    cucumberOpts: {
+        compiler: "ts:ts-node/register",
+        format: ["json:.tmp/results.json", "node_modules/cucumber-pretty" ],
+        require: ["../stepdefinitions/*.ts", "../support/*.ts"],
+        strict: true,
+        tags: "",
+    },
+
+    plugins: [{
+        package: 'protractor-multiple-cucumber-html-reporter-plugin',
+        options: {
+            automaticallyGenerateReport: true,
+            removeExistingJsonReportFile: true
+        }
+    }],
+
+    onCleanUp: () => {
+        generateXmlReport();
+    },
+};
