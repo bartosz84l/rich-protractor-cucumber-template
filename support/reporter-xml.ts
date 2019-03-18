@@ -1,7 +1,10 @@
-const { exec } = require('child_process');
+const cucumberJunitConvert = require('cucumber-junit-convert');
+
+const options = {
+    inputJsonFile: '.tmp/results.json',
+    outputXmlFile: '.tmp/results.xml'
+}
 
 export function generateXmlReport() {
-
-    exec('node_modules/.bin/cucumber-js --format=json | node_modules/.bin/cucumber-junit > .tmp/results.xml');
-
+    cucumberJunitConvert.convert(options);
 }

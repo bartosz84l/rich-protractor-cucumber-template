@@ -1,6 +1,6 @@
 {
-  "name": "automation-template",
-  "version": "4.0.0",
+  "name": "rich-protractor-cucumber-template",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "To demostrate cucumber tests for wildmoka app",
   "homepage": "https://github.com/jacekokrojek/rich-protractor-cucumber-template",
@@ -28,7 +28,7 @@
     "debug": "node -r ts-node/register --inspect-brk ./node_modules/protractor/bin/protractor config/config.ts",
     "debug-scenario": "node -r ts-node/register --inspect-brk ./node_modules/protractor/bin/protractor config/config.ts --cucumberOpts.tags=\"@scenario\""
   },
-  "author": "Kamila Menes-Szuster <kamila.menes@testarmy.com>",
+  "author": "Jacek Okrojek <jacek.okrojek@gmail.com>",
   "devDependencies": {
     "@types/cucumber": "^4.0.4",
     "@types/node": "^10.7.1",
@@ -48,10 +48,9 @@
   "repository": "https://bitbucket.org/jacekokrojek-testarmy/wildmoka.git",
   "dependencies": {
     "btoa": "^1.2.1",
-    "cucumber-junit": "latest",
+    "cucumber-junit-convert": "^1.0.2",
     "cucumber-pretty": "^1.5.0",
     "googleapis": "^27.0.0",
-    "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.0",
-    "simplecrawler": "^1.1.6"
+    "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.0"
   }
 }

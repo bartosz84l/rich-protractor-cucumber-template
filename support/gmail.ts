@@ -1,19 +1,74 @@
-const fs = require('fs');
-const readline = require('readline');
 const { google } = require('googleapis');
+import * as fs from "fs";
+import * as readline  from 'readline';
+
+
+class GmailClient {
+
+    oAuth2Client
+    constructor(credentials, token) {
+        const { client_secret, client_id, redirect_uris } = credentials.installed;
+        this.oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+        this.oAuth2Client.setCredentials(token);
+    }
+    listMessages() {
+        return new Promise((resolve, reject) => {
+            const gmail = google.gmail({ version: 'v1', auth: this.oAuth2Client });
+            gmail.users.messages.list({
+                userId: 'me',
+            }, (err, res) => {
+                if (err) return reject('The API returned an error: ' + err);
+                resolve(res.data.messages);
+            }
+            )
+        });
+    }
+
+    getMessage(id) {
+        return new Promise((resolve, reject) => {
+            const gmail = google.gmail({ version: 'v1', auth: this.oAuth2Client });
+            gmail.users.messages.get({
+                userId: 'me', id
+            }, (err, res) => {
+                if (err) return reject('The API returned an error: ' + err);
+                resolve(res.data);
+            });
+        });
+    }
+
+    deleteMessage(id) {
+        return new Promise((resolve, reject) => {
+            const gmail = google.gmail({ version: 'v1', auth: this.oAuth2Client });
+            gmail.users.messages.delete({
+                userId: 'me', id
+            }, (err, res) => {
+                if (err) return reject('The API returned an error: ' + err);
+                resolve(res.data);
+            });
+        });
+    }
+
+    deleteLastMessage() {
+        return this.listMessages().then((messages) => {
+            return this.deleteMessage(messages[0].id)
+        })
+    }
+}
+
+export { GmailClient }
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://mail.google.com/'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = '../config/gmail/token.json';
+const TOKEN_PATH = process.argv[3];
 
 // Load client secrets from a local file.
-fs.readFile('../config/gmail/credentials.json', (err, content) => {
+fs.readFile(process.argv[2], (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   // Authorize a client with credentials, then call the Gmail API.
-  authorize(JSON.parse(content), listLabels);
+  authorize(JSON.parse(content.toString('utf8')), listLabels);
 });
 
 /**
@@ -30,7 +85,7 @@ function authorize(credentials, callback) {
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return getNewToken(oAuth2Client, callback);
-    oAuth2Client.setCredentials(JSON.parse(token));
+    oAuth2Client.setCredentials(JSON.parse(token.toString('utf8')));
     callback(oAuth2Client);
   });
 }
@@ -72,37 +127,15 @@ function getNewToken(oAuth2Client, callback) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listLabels(auth) {
-  const gmail = google.gmail({ version: 'v1', auth });
-  gmail.users.messages.list({
-    userId: 'me',
-  }, (err, res) => {
-    if (err) return console.log('The API returned an error: ' + err);
-    // console.log(res.data);
-    gmail.users.messages.get({
-      userId: 'me', id: res.data.messages[0].id
+  return new Promise((resolve, reject) => {
+    const gmail = google.gmail({ version: 'v1', auth: auth });
+    gmail.users.messages.list({
+      userId: 'me',
     }, (err, res) => {
-      if (err) return console.log('The API returned an error: ' + err);
-      var message = res.data.payload.parts[0].body.data
-      var paragraph = Buffer.from(message, 'base64').toString('ascii');
-      var regexPassword = /(?<=Password: ).*/g
-      var foundPassword = paragraph.match(regexPassword);
-      var password = foundPassword.toString();
-      var regexEmail = /(?<=Email: ).*/g
-      var foundEmail = paragraph.match(regexEmail);
-      var email = foundEmail.toString();
-      console.log(password);
-      console.log(email);
-    });
+      if (err) return reject('The API returned an error: ' + err);
+      resolve(res.data.messages);
+    }
+    )
   });
 };
 
-function deleteLastEmail(client_id) {
-  var labelName = "deleteForever";
-  GmailApp.search("in:trash label:" + labelName);
-  Gmail.Users.Messages.remove(client_id);
-};
-
-function deleteThread(client_id, threadId) {
-  service.users().threads().delete(client_id, threadId).execute();
-  System.out.println("Thread with id: " + threadId + " deleted successfully.");
-};

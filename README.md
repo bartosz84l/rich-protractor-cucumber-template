@@ -25,6 +25,10 @@ If You want to run tests in headless mode, use following command:
 
 `npm run ci`
 
+You can also run test using docker. An example could you usign following command
+
+``docker run --rm --mount type=bind,src="`pwd`",dst="/home/circleci" angular/ngcontainer -c "npm install && npm run webdriver-update-ci && xvfb-run --server-args=\"-screen 0 1920x1080x24\" npm run ci"``
+
 ### Test Data
 To check of the input data used in case tests please look at data/test-config.ts
 

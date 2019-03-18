@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-export class FileHelper {
+export class Downloads {
     static downloadedImagePath = `${process.cwd()}/data/downloads/image.jpg`;
 
     public static deleteIfExists(file) {
