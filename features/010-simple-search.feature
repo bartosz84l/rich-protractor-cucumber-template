@@ -1,6 +1,6 @@
-Feature: 010 - Simple Search
+Feature: 010 - Onboarding
     
     @ci
-    Scenario: Searching signle phrase
-        When I enter "TestArmy" phrase
-        Then I should see "TestArmy" page in the 1 row of the results
+    Scenario: Onboarding for US resident
+        Given user visits sign up page
+

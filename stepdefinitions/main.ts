@@ -1,14 +1,12 @@
-import { When, Then } from "cucumber";
+import { When, Then, Given } from "cucumber";
 import { Goolge } from "../pages/app/google";
 import { Actions } from "../support/actions";
+import { Create } from "../pages/app/create";
 
 const chai = require("chai").use(require("chai-as-promised"));
 const expect = chai.expect;
 const googlePage: Goolge = new Goolge();
 
-/**
- * DO NOT USE ARROW FUNCTIONS FOR STEP DEFINITION - TO MAKE "THIS" THE RIGHT "THIS"
- */
 
 When(/^I enter "([^"]+)" phrase$/, async function (phrase: string) {
     await Actions.attachScreenshot(this);
@@ -19,3 +17,8 @@ Then(/^I should see "([^"]+)" page in the (.+) row of the results$/, async funct
     await Actions.attachScreenshot(this);
     expect(await googlePage.getResult(resultRowIdx)).to.contain(expectedPhrase);
 });
+
+Given(/user visits sign up page/, async function (){
+    let create: Create = new Create();
+    create.fillCreateAccountForm('sample', 'samle', 'sample', 'sample')
+})

@@ -1,4 +1,4 @@
-## Cucumber automation tests for Wildmoka app
+## New tests for Direct Client portal
 
 ### Installation
 Make sure you have installed latest Node JS and Chrome browser. Once you clone repository, execute the following command to download all required dependencies
