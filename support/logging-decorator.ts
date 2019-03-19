@@ -10,9 +10,6 @@ export function logThisMethod(target: Object, propertyKey: string, descriptor: T
         let methodArguments = args.map(arg=>{
             return arg instanceof ElementFinder ? arg.locator() : arg;
         }).join(', ')
-
-        // (argument instanceof ElementFinder? argument.locator() : argument)
-        // pre
         await Actions.log(`###      [executing action] ${functionName} (${methodArguments})`)
 
         // run original annotated method and store result

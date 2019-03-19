@@ -12,7 +12,6 @@ class Actions {
         logger.debug(message)
     };
 
-
     public static async attachScreenshot(world) {
         const screenShot = await browser.takeScreenshot();
         world.attach(screenShot, "image/png");
@@ -38,12 +37,8 @@ class Actions {
     };
 
     @logThisMethod
-    public static async waitToBeVisible(element, ms: number) {
-        try {
-            await browser.wait(browser.ExpectedConditions.visibilityOf(element), ms);
-        } catch (error) {
-            throw new Error(`Failed while waiting ${ms}ms for element ${element}`)
-        }
+    public static async waitToBeVisible(element: ElementFinder, ms: number) {
+            await browser.wait(browser.ExpectedConditions.visibilityOf(element), ms, `Failed while waiting ${ms}ms for element ${element.locator()}`);
     };
 
     @logThisMethod
