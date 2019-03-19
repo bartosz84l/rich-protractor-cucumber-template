@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions, element } from 'protractor';
+import { browser } from 'protractor';
 import { CustomWait } from "../support/wait";
 import { logThisMethod } from "../support/logging-decorator"
 import { testConfig } from "../config/test-config";

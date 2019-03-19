@@ -1,10 +1,8 @@
 import {$, $$, ElementFinder, ElementArrayFinder } from "protractor";
 import { Actions } from "../../support/actions";
-import { BrowserActions } from "../../support/browser";
-import { CustomWait } from "../../support/wait";
 
 
-export class Goolge {
+export class Google {
     private searchInput: ElementFinder;
     private searchButton: ElementFinder;
     private results: ElementArrayFinder;
