@@ -12,7 +12,6 @@ Before(async function (scenario) {
     await BrowserActions.get("/");
     await Actions.attachScreenshot(this);
     await Actions.log(`Loaded "/"`);
-
 });
 
 After(async function (scenario) {
@@ -20,6 +19,7 @@ After(async function (scenario) {
         await Actions.attachScreenshot(this);
     }
     await BrowserActions.clearBrowserData();
+    await BrowserActions.getConsoleErrors();
 });
 
 
