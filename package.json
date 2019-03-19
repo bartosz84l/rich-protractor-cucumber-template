@@ -46,12 +46,13 @@
     "ts-node": "^7.0.1",
     "typescript": "^3.0.1"
   },
-  "repository": "https://bitbucket.org/jacekokrojek-testarmy/wildmoka.git",
+  "repository": "https://github.com/jacekokrojek/rich-protractor-cucumber-template",
   "dependencies": {
     "btoa": "^1.2.1",
     "cucumber-junit-convert": "^1.0.2",
     "cucumber-pretty": "^1.5.0",
     "googleapis": "^27.0.0",
-    "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.0"
+    "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.0",
+    "winston": "^3.2.1"
   }
 }

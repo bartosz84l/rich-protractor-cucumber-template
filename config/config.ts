@@ -4,7 +4,7 @@ import { generateXmlReport } from "../support/reporter-xml"
 export const config: Config = {
 
     directConnect: true,
-
+    restartBrowserBetweenTests: false,
     SELENIUM_PROMISE_MANAGER: false,
 
     capabilities: {
