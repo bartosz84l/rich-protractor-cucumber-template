@@ -37,6 +37,15 @@ export const config: Config = {
         browser.ignoreSynchronization = true;
         browser.manage().window().maximize();
         browser.manage().timeouts().implicitlyWait(30000);
+
+        const protractorImageComparison = require('protractor-image-comparison');
+        browser.protractorImageComparison = new protractorImageComparison(
+            {
+                baselineFolder: 'data/image-comparison/baseline/',
+                screenshotPath: 'data/image-comparison/screenshots/',
+                autoSaveBaseline: true
+            }
+        )
     },
 
     cucumberOpts: {

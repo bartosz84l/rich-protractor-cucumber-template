@@ -1,6 +1,5 @@
-import { browser, ExpectedConditions, element } from 'protractor';
+import { browser } from 'protractor';
 import { CustomWait } from "../support/wait";
-import { Actions } from './actions';
 import { logThisMethod } from "../support/logging-decorator"
 
 class BrowserActions {

@@ -1,12 +1,13 @@
-import { When, Then, Given } from "cucumber";
-import { Goolge } from "../pages/app/google";
+import { When, Then } from "cucumber";
+import { Google } from "../pages/app/google";
 import { Actions } from "../support/actions";
-import { Create } from "../pages/app/create";
+import { ImageCompare } from "../support/imageCompare";
+import { $ } from "protractor";
 
 const chai = require("chai").use(require("chai-as-promised"));
 const expect = chai.expect;
-const googlePage: Goolge = new Goolge();
-
+const googlePage: Google = new Google();
+const imageCompare: ImageCompare = new ImageCompare();
 
 When(/^I enter "([^"]+)" phrase$/, async function (phrase: string) {
     await Actions.attachScreenshot(this);
@@ -18,7 +19,17 @@ Then(/^I should see "([^"]+)" page in the (.+) row of the results$/, async funct
     expect(await googlePage.getResult(resultRowIdx)).to.contain(expectedPhrase);
 });
 
-Given(/user visits sign up page/, async function (){
-    let create: Create = new Create();
-    create.fillCreateAccountForm('sample', 'samle', 'sample', 'sample')
+Then(/^We should get a Google page$/, async function () {
+    await Actions.attachScreenshot(this);
+    expect(await imageCompare.checkFullPageScreen('googlePage')).to.equal(0);
+})
+
+Then(/^We should see a Google Logo$/, async function () {
+    await Actions.attachScreenshot(this);
+    expect(await imageCompare.checkElement($('#hplogo'), 'googleLogo')).to.equal(0);
+})
+
+Then(/^This should be fail$/, async function () {
+    await Actions.attachScreenshot(this);
+    expect(await imageCompare.checkElement($('#hplogo'), 'googleLogoFail')).to.not.equal(0); // To make it failing just remove "not"
 })
