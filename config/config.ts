@@ -3,9 +3,8 @@ import { generateXmlReport } from "../support/reporter-xml"
 
 export const config: Config = {
 
-    seleniumAddress: "http://127.0.0.1:4444/wd/hub",
     directConnect: true,
-
+    restartBrowserBetweenTests: false,
     SELENIUM_PROMISE_MANAGER: false,
 
     capabilities: {

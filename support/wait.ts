@@ -2,6 +2,7 @@ import { browser, ExpectedConditions, ElementFinder } from 'protractor';
 
 class CustomWait {
 
+
     public static async waitForTextInElement(element, text: string, ms: number) {
         await browser.wait(browser.ExpectedConditions.textToBePresentInElement(element, text), ms);
     };

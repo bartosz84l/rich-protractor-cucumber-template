@@ -8,3 +8,4 @@ const options = {
 export function generateXmlReport() {
     cucumberJunitConvert.convert(options);
 }
+ 
