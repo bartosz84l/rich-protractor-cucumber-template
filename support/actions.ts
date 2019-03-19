@@ -8,17 +8,6 @@ class Actions {
     static SLOW_DOWN = 500;
     static FILE_DOWNLOAD_TIMEOUT = 20000;
 
-    @logThisMethod
-    public static async waitForUrl(url) {
-        debugger;
-        browser.ignoreSynchronization = true;
-        await browser.waitForAngularEnabled(false);
-        await browser.get(url);
-
-        debugger;
-        await browser.wait(browser.ExpectedConditions.urlContains(url), 5000);
-    }
-
     public static log(...message: any[]) {
         logger.debug(message)
     };
@@ -37,32 +26,6 @@ class Actions {
     public static async waitToClick(element, ms: number) {
         await browser.wait(browser.ExpectedConditions.elementToBeClickable(element), ms);
     };
-
-
-    @logThisMethod
-    public static async dragAndDrop(element: any, horizontalOffset: number) {
-        await this.waitToBeVisible(element, this.MEDIUM_TIMEOUT);
-        await this.highlightElement(element);
-        await browser.actions().mouseMove(element).perform();
-        await browser.actions().mouseDown(element).perform();
-        await browser.sleep(700);
-        await browser.actions().mouseMove({ x: horizontalOffset, y: 0 }).perform();
-        await browser.actions().mouseUp(element).perform();
-
-    }
-
-    @logThisMethod
-    public static async clickRelativeToLeftEdge(element: any, horizontalOffsetPercent: number) {
-        await this.waitToBeVisible(element, this.MEDIUM_TIMEOUT);
-        await this.highlightElement(element);
-        const elementWidth = await this.getElementWidth(element);
-        console.log(elementWidth);
-        const pixelPositionToClick = (elementWidth * horizontalOffsetPercent) / 100
-        console.log(pixelPositionToClick);
-        await browser.actions().mouseMove(element).perform();
-        await browser.actions().mouseMove(element, { x: Math.round(pixelPositionToClick), y: 0 }).perform();
-        await browser.actions().click().perform();
-    }
 
     public static async highlightElement(element) {
         await browser.executeScript("arguments[0].style.border='3px solid #FFA500'", element);
@@ -141,16 +104,6 @@ class Actions {
         }).get(0);
     };
 
-    @logThisMethod
-    public static async getElementWidth(element: any) {
-        const size = await element.getSize();
-        return size.width;
-    }
-
-    @logThisMethod
-    public static async getDesiredSocialAccount(name) {
-        return await this.click(element(by.xpath(`//div[@id="add-account-widget"]//div[@data-title='${name}']`)));
-    };
 }
 
 export { Actions };

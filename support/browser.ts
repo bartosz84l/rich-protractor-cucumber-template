@@ -9,6 +9,12 @@ class BrowserActions {
     static SLOW_DOWN = 500;
 
     @logThisMethod
+    public static async get(url) {
+        await browser.get(url);
+        await browser.wait(browser.ExpectedConditions.urlContains(url), this.MEDIUM_TIMEOUT);
+    }
+
+    @logThisMethod
     public static async switchTo(element) {
         await browser.switchTo().frame(element.getWebElement());
     };
@@ -31,17 +37,6 @@ class BrowserActions {
     };
 
     @logThisMethod
-    public static async dragAndDrop(element) {
-        await Actions.click(element);
-        await browser.actions().dragAndDrop(element, {x:200, y:0}).perform();
-    };
-
-    @logThisMethod
-    public static async slide(element) {
-        await browser.actions().dragAndDrop(element, {x:50, y:0}).perform();
-    };
-
-    @logThisMethod
     public static async closeTab() {
         await browser.manage().deleteAllCookies();
         await browser.close();
@@ -53,10 +48,6 @@ class BrowserActions {
         await browser.refresh();
     };
 
-    @logThisMethod
-    public static async get(url) {
-        await browser.get(url);
-    };
 }
 
 export { BrowserActions };
