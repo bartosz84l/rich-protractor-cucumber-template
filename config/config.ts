@@ -13,7 +13,7 @@ export const config: Config = {
         browserName: "chrome",
         restartBrowserBetweenTests: false,
         chromeOptions: {
-            args: ['--no-sandbox', '--test-type=browser', "--window-size=1920,1080"],
+            args: ['--no-sandbox', '--test-type=browser'],
             prefs: {
                 'plugins.always_open_pdf_externally': true,
                 'download': {
@@ -35,7 +35,7 @@ export const config: Config = {
 
     onPrepare: () => {
         browser.ignoreSynchronization = true;
-        browser.manage().window().maximize();
+        browser.manage().window().setSize(1920, 1080);
         browser.manage().timeouts().implicitlyWait(30000);
 
         const protractorImageComparison = require('protractor-image-comparison');
