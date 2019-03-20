@@ -43,7 +43,8 @@ export const config: Config = {
             {
                 baselineFolder: 'data/image-comparison/baseline/',
                 screenshotPath: 'data/image-comparison/screenshots/',
-                autoSaveBaseline: true
+                autoSaveBaseline: true,
+                formatImageName: '{browserName}_{tag}'
             }
         )
     },
