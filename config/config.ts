@@ -13,7 +13,7 @@ export const config: Config = {
         browserName: "chrome",
         restartBrowserBetweenTests: false,
         chromeOptions: {
-            args: ['--no-sandbox', '--test-type=browser'],
+            args: ['--no-sandbox', '--test-type=browser', "--window-size=1920,1080"],
             prefs: {
                 'plugins.always_open_pdf_externally': true,
                 'download': {
@@ -44,7 +44,7 @@ export const config: Config = {
                 baselineFolder: 'data/image-comparison/baseline/',
                 screenshotPath: 'data/image-comparison/screenshots/',
                 autoSaveBaseline: true,
-                formatImageName: '{browserName}_{tag}'
+                formatImageName: '{browserName}_{tag}_{width}-{height}'
             }
         )
     },
