@@ -24,9 +24,14 @@ Then(/^We should get a Google page$/, async function () {
     expect(await imageCompare.checkFullPageScreen('googlePage')).to.equal(0);
 })
 
-Then(/^We should see a Google Logo$/, async function () {
+Then(/^We should see a Google search field$/, async function () {
     await Actions.attachScreenshot(this);
-    expect(await imageCompare.checkElement($('#hplogo'), 'googleLogo')).to.equal(0);
+    expect(await imageCompare.checkElement($('div.RNNXgb'), 'googleSearch')).to.equal(0);
+})
+
+Then(/^We should get a TestArmy header on Google page$/, async function () {
+    await Actions.attachScreenshot(this);
+    expect(await imageCompare.checkElement($('div.kp-header'), 'testArmyHeaderGoogle')).to.equal(0);
 })
 
 Then(/^This should be fail$/, async function () {
