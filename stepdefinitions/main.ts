@@ -2,7 +2,7 @@ import { When, Then } from "cucumber";
 import { Google } from "../pages/app/google";
 import { Actions } from "../support/actions";
 import { ImageCompare } from "../support/imageCompare";
-import { $ } from "protractor";
+import { $, browser } from "protractor";
 
 const chai = require("chai").use(require("chai-as-promised"));
 const expect = chai.expect;
