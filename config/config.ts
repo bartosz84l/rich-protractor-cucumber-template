@@ -45,8 +45,7 @@ export const config: Config = {
                 screenshotPath: 'data/image-comparison/screenshots/',
                 formatImageName: '{browserName}_{tag}_{width}-{height}',
                 autoSaveBaseline: true,
-                ignoreAntialiasing: true,
-                saveAboveTolerance: 2,
+                canvasScreenshot: true
             }
         )
     },
