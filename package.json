@@ -54,6 +54,7 @@
     "googleapis": "^27.0.0",
     "protractor-image-comparison": "^2.0.1",
     "protractor-multiple-cucumber-html-reporter-plugin": "^1.8.0",
+    "sync-request": "^6.1.0",
     "winston": "^3.2.1"
   }
 }
