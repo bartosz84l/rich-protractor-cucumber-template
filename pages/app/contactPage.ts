@@ -13,17 +13,17 @@ export class ContactPage {
   private findMessage: ElementFinder;
   private searchButton: ElementFinder;
   private menuItems: ElementArrayFinder;
-  private messagePage: string = testConfig.messageFromPage;
-  private messageVisible: ElementFinder
+  private messagePage: string;
+  private messageVisible: ElementFinder;
 
   constructor() {
     this.findName = $('#name');
     this.findEmail = $('#email');
     this.findMessage= $('#content');
-    this.searchButton = $('button[type = "submit"]').first();
+    this.searchButton = $('button[type = "submit"]');
     this.menuItems = $$('ul.nav > li > a');
-    this.messageVisible = $('message h3');
-    this.messagePage = testConfig.messageFromPage;
+    this.messageVisible = $('.message h3');
+    this.messagePage = 'Your message has been sent.';
 
   };
 
@@ -37,11 +37,11 @@ export class ContactPage {
   
   };
 
+ async open() {
+ await Actions.click(this.menuItems.get(4));
+ };
 
-  async goToPage(){
-    //await Actions.click( this.menuItems.get(4));
-   
-  }
+
 
   
   async getExpectedMessage(){

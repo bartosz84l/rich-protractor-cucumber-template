@@ -2,7 +2,7 @@
 import { Given, When, Then } from "cucumber";
 import { testConfig } from "../config/test-config";
 import { ContactPage } from "../pages/app/contactPage";
-import { async } from "q";
+
 
 
 
@@ -12,14 +12,14 @@ const contact: ContactPage = new ContactPage();
 
 
 Given(/^User is on a contact page$/, async function(){
-    await contact.goToPage();
-})
+    await contact.open();
+});
 
-    When(/^User fills out all the relevant fields "([^"]+)", (.+), (.+) and click submit button$/, async function (name: string, email: string, msg: string) {
+    When(/^User fills out all the relevant fields ([^"]+), (.+), (.+) and click submit button$/, async function (name: string, email: string, msg: string) {
     await contact.fillForm(name,email,msg);
 });
 
     Then(/^User should see the message$/, async function () {
-        expect(await contact.getExpectedMessage()).to.contain(testConfig.messageFromPage);
+        expect(await contact.getExpectedMessage()).to.contain('Your message has been sent.');
 });
 
