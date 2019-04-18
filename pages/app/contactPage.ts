@@ -1,11 +1,9 @@
-
 import { $, $$, ElementFinder, element, ElementArrayFinder } from "protractor";
 import { Actions } from "../../support/actions";
 import { CustomWait } from "../../support/wait";
-import { testConfig } from "../../config/test-config";
+
 
 export class ContactPage {
-
 
   private TIMEOUT: number = 10000;
   private findName: ElementFinder;
@@ -19,12 +17,11 @@ export class ContactPage {
   constructor() {
     this.findName = $('#name');
     this.findEmail = $('#email');
-    this.findMessage= $('#content');
+    this.findMessage = $('#content');
     this.searchButton = $('button[type = "submit"]');
     this.menuItems = $$('ul.nav > li > a');
     this.messageVisible = $('.message h3');
     this.messagePage = 'Your message has been sent.';
-
   };
 
 
@@ -32,23 +29,16 @@ export class ContactPage {
     await Actions.sendKeys(this.findName, name);
     await Actions.sendKeys(this.findEmail, email);
     await Actions.sendKeys(this.findMessage, msg);
-    await Actions.click(this.searchButton); 
-    
-  
+    await Actions.click(this.searchButton);
   };
 
- async open() {
- await Actions.click(this.menuItems.get(4));
- };
+  async open() {
+    await Actions.click(this.menuItems.get(4));
+  };
 
-
-
-  
-  async getExpectedMessage(){
-    await CustomWait.waitForTextInElement(this.messageVisible, this.messagePage, this.TIMEOUT  )
+  async getMessageAfterSubmit() {
+    await CustomWait.waitForTextInElement(this.messageVisible, this.messagePage, this.TIMEOUT)
     return this.messageVisible.getText();
-  
-    }
+  }
 
-
-  };
+};
