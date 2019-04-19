@@ -15,7 +15,7 @@ When(/^User fills out all the relevant fields ([^"]+), (.+), (.+) and click subm
     await contact.fillForm(name, email, msg);
 });
 
-Then(/^User should see the message$/, async function () {
+Then(/^After user should see the message$/, async function () {
     expect(await contact.getMessageAfterSubmit()).to.contain('Your message has been sent.');
 });
 
