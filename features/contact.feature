@@ -6,7 +6,7 @@ Feature: 021 - Contact form
     Scenario Outline: Fill and send contact form
         Given User is on a contact page
         When User fills out all the relevant fields <Name>, <Email>, <Content> and click submit button
-        Then User should see the message
+        Then User should see the message after
 
         Examples:
             | Name   | Email | Content |
