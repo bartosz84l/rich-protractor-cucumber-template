@@ -4,7 +4,6 @@ reports/
 .DS_Store
 npm-debug.log
 /data/downloads/*.jpg
-*.sh
 .tmp
 .vscode/
 .cache/
